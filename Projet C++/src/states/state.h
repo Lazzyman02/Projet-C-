@@ -1,11 +1,14 @@
+#ifndef STATE_H
+#define STATE_H
+
 #include <SFML/Graphics.hpp>
-#include <iostream>
-class WindowManager {
+
+class State {
 public:
-    WindowManager() : window(sf::VideoMode(sf::Vector2u(800, 600)), "Mon Jeu de Ping Pong !") {
-        window.setFramerateLimit(60);
-    }
-    sf::RenderWindow& getWindow() {
-        return window;
-    }
-}
+    virtual ~State() = default;
+    virtual void handleInput() = 0;
+    virtual void update() = 0;
+    virtual void draw(sf::RenderWindow& window) = 0;
+};
+
+#endif
