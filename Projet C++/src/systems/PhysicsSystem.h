@@ -41,8 +41,8 @@ public:
             sound.setBuffer(AssetManager::getInstance().getSoundBuffer());
             sound.play();
             ball.speedx *= -1;
-            ball.speedx *= 1.1f;
-            ball.speedy *= 1.1f;
+            ball.speedx *= 1.12f;
+            ball.speedy *= 1.12f;
             
         }
     }

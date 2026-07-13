@@ -6,7 +6,7 @@ class ScoreSystem {
 private:
     inline static int playerScore = 0;
     inline static int aiScore = 0;
-    inline static const int winScore = 5;
+    inline static const int winScore = 7;
 
 public:
     void Score(Ball& ball, int scrWidth, int scrHeight, PhysicsSystem& physics) {
