@@ -3,9 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class State {
+class IState {
 public:
-    virtual ~State() = default;
+    virtual ~IState() = default;
     virtual void handleInput() = 0;
     virtual void update() = 0;
     virtual void draw(sf::RenderWindow& window) = 0;

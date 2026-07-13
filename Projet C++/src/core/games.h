@@ -1,21 +1,25 @@
 #ifndef GAMES_H
 #define GAMES_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "../states/stateGame.h"
+#include "assetManager.h"
+#include "../states/state.h"
+#include "../states/StateGame.h"
 
 class Games {
 private:
-    int width;
-    int height;
+    int m_width;
+    int m_height;
     sf::RenderWindow window;
+    std::unique_ptr<IState> currentState;
 
 public:
-    Games(int w, int h) : width(w), height(h) {
-        window.create(sf::VideoMode(sf::Vector2u(width, height)), "State Engine Pong");
+    Games(int w, int h) : m_width(w), m_height(h) {
+        window.create(sf::VideoMode(sf::Vector2u(m_width, m_height)), "State Engine Pong");
         window.setFramerateLimit(60);
-        
+        currentState = std::make_unique<StateGame>(m_width, m_height);
     }
 
     void run() {
@@ -24,18 +28,16 @@ public:
                 if (event->is<sf::Event::Closed>())
                     window.close();
             }
-
-            // 1. Inputs Processing
             if (currentState) currentState->handleInput();
-
-            // 2. State Physics Updates
             if (currentState) currentState->update();
-
-            // 3. Frame Graphic Renderings
             window.clear(sf::Color::Black);
             if (currentState) currentState->draw(window);
             window.display();
         }
+    }
+
+    void init(std::unique_ptr<IState> state) {
+        currentState = std::move(state);
     }
 };
 

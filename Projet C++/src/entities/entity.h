@@ -5,11 +5,11 @@
 
 class Entity {
 public:
-    int speedx = 0;
-    int speedy = 0;
-    int speed = 0;
-    float x = 0.f;
-    float y = 0.f;
+    int speedx;
+    int speedy;
+    int speed;
+    float x;
+    float y;
     sf::Color color = sf::Color::White;
 
     virtual ~Entity() = default;

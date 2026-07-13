@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 LDFLAGS = 
-LDLIBS = -lsfml-graphics -lsfml-window -lsfml-system
+LDLIBS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system
 
 SOURCES = main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
