@@ -16,6 +16,15 @@ public:
         rect.setPosition(sf::Vector2f(x, y));
         window.draw(rect);
     }
+
+    void theWall(sf::RenderWindow& window) {
+        sf::RectangleShape rect(sf::Vector2f(width, height));
+        rect.setFillColor(color);
+        rect.setOrigin(sf::Vector2f(width / 2.f, height / 2.f));
+        rect.setPosition(sf::Vector2f(x, y));
+        window.draw(rect);
+    }
+    
 };
 
 #endif

@@ -29,6 +29,7 @@ public:
         }
         physics.restrictPaddle(aiPaddle, scrHeight);
     }
+    
 };
 
 #endif
