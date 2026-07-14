@@ -17,7 +17,6 @@ private:
     int m_width, m_height;
     sf::Color drkgrn = sf::Color(20, 160, 133, 255);
 
-    // Game Entities
     Ball ball;
     Paddle playerPaddle;
     Paddle aiPaddle;
@@ -30,6 +29,10 @@ private:
 
     sf::Text playerScoreText;
     sf::Text aiScoreText;
+
+    sf::Text playerSetsText;
+    sf::Text aiSetsText;
+
     sf::Text gameOverText;
     bool gameOver = false;
 
@@ -40,6 +43,8 @@ public:
           drawHelper(scrWidth, scrHeight),
           playerScoreText(AssetManager::getInstance().getFont()),
           aiScoreText(AssetManager::getInstance().getFont()),
+          playerSetsText(AssetManager::getInstance().getFont()),
+          aiSetsText(AssetManager::getInstance().getFont()),     
           gameOverText(AssetManager::getInstance().getFont())
     {
         drawHelper.initBall(ball);
@@ -47,9 +52,18 @@ public:
         drawHelper.initAiPaddle(aiPaddle);
         drawHelper.initLine(centerLine);
 
+       
         drawHelper.initPlayerScoreText(playerScoreText);
         drawHelper.initAiScoreText(aiScoreText);
         drawHelper.initGameOverText(gameOverText);
+
+        playerSetsText.setCharacterSize(20);
+        playerSetsText.setFillColor(sf::Color::White);
+        playerSetsText.setPosition({scrWidth-scrWidth/3.f , 50.f}); 
+
+        aiSetsText.setCharacterSize(20);
+        aiSetsText.setFillColor(sf::Color::White);
+        aiSetsText.setPosition({scrWidth / 3.f, 50.f});
     }
 
     void handleInput() override
@@ -69,12 +83,16 @@ public:
 
         physics.updateBall(ball, m_width, m_height);
         score.Score(ball, m_width, m_height, physics);
+
         playerScoreText.setString(std::to_string(ScoreSystem::getPlayerScore()));
         aiScoreText.setString(std::to_string(ScoreSystem::getAIScore()));
 
+        playerSetsText.setString("Sets: " + std::to_string(ScoreSystem::getPlayerSets()));
+        aiSetsText.setString("Sets: " + std::to_string(ScoreSystem::getAISets()));
+
         if (ScoreSystem::isGameOver()) {
             gameOver = true;
-            gameOverText.setString(ScoreSystem::getPlayerScore() >= 5 ? "Player Wins!" : "AI Wins!");
+            gameOverText.setString(ScoreSystem::getPlayerSets() >= 3 ? "Player Wins the Match!" : "AI Wins the Match!");
             return;
         }
 
@@ -86,14 +104,17 @@ public:
 
     void draw(sf::RenderWindow& window) override
     {
-
         window.clear(drkgrn);
         window.draw(centerLine);
         playerPaddle.thePaddle(window);
         aiPaddle.thePaddle(window);
         ball.theBall(window);
+
         window.draw(playerScoreText);
         window.draw(aiScoreText);
+
+        window.draw(playerSetsText);
+        window.draw(aiSetsText);
 
         if (gameOver) {
             window.draw(gameOverText);

@@ -18,7 +18,7 @@ private:
 public:
     Games(int w, int h) : m_width(w), m_height(h) {
         window.create(sf::VideoMode(sf::Vector2u(m_width, m_height)), "State Engine Pong");
-        window.setFramerateLimit(60);
+        window.setFramerateLimit(120);
         currentState = std::make_unique<StateGame>(m_width, m_height);
     }
 

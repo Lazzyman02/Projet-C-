@@ -65,7 +65,7 @@ public:
 
     void initGameOverText(sf::Text& text) {
         text.setCharacterSize(40);
-        text.setFillColor(sf::Color::Yellow);
+        text.setFillColor(sf::Color(58, 31, 97, 255));
         text.setPosition({m_width / 2.f - 140.f, m_height / 2.f - 20.f});
         text.setString("");
     }
